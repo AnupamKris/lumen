@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Lumen
+Comment=A light, modern Wayland desktop (floating + tiling)
+Exec=lumen-session
+Type=Application
+DesktopNames=Lumen

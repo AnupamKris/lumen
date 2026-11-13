@@ -1,0 +1,12 @@
+build*/
+dist/
+# VM images, keys and runtime state (recreated by vm/start.sh)
+vm/*.qcow2
+vm/*.iso
+vm/id_vm*
+vm/*.log
+vm/*.pid
+vm/*.sock
+vm/*.png
+vm/seed/
+.DS_Store

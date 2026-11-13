@@ -1,0 +1,11 @@
+#!/bin/sh
+# Session menu: lock / log out / suspend / restart / shut down.
+choice=$(printf '%s\n' "Lock" "Log out" "Suspend" "Restart" "Shut down" |
+  fuzzel --dmenu --lines 5 --width 16 --prompt "" --placeholder "Session") || exit 0
+case "$choice" in
+  "Lock")      exec lumen-lock ;;
+  "Log out")   exec lumen --msg exit ;;
+  "Suspend")   exec systemctl suspend ;;
+  "Restart")   exec systemctl reboot ;;
+  "Shut down") exec systemctl poweroff ;;
+esac

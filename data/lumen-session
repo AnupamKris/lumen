@@ -1,0 +1,17 @@
+#!/bin/sh
+# Session entry point used by the display manager (LightDM/GDM/SDDM).
+export XDG_CURRENT_DESKTOP=Lumen
+export XDG_SESSION_DESKTOP=lumen
+export XDG_SESSION_TYPE=wayland
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM="wayland;xcb"
+export XCURSOR_THEME="${XCURSOR_THEME:-Adwaita}"
+
+# First run: seed per-user config from the defaults (never overwrite).
+cfg="${XDG_CONFIG_HOME:-$HOME/.config}"
+seed() { [ -f "$cfg/$2" ] || { mkdir -p "$(dirname "$cfg/$2")"; cp "/usr/share/lumen/$1" "$cfg/$2" 2>/dev/null; }; }
+seed lumen.conf lumen/lumen.conf
+seed fuzzel.ini fuzzel/fuzzel.ini
+seed mako.conf  mako/config
+
+exec lumen "$@"

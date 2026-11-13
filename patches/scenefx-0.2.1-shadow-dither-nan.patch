@@ -1,0 +1,16 @@
+diff --git a/render/fx_renderer/gles2/shaders/box_shadow.frag b/render/fx_renderer/gles2/shaders/box_shadow.frag
+index 0770e5e..89e19f6 100644
+--- a/render/fx_renderer/gles2/shaders/box_shadow.frag
++++ b/render/fx_renderer/gles2/shaders/box_shadow.frag
+@@ -69,7 +69,10 @@ float roundedBoxShadow(vec2 lower, vec2 upper, vec2 point, float sigma, float co
+ 
+ // per-pixel "random" number between 0 and 1
+ float random() {
+-    return fract(sin(dot(vec2(12.9898, 78.233), gl_FragCoord.xy)) * 43758.5453);
++    // keep the sin() argument small: some GL implementations (llvmpipe) return
++    // NaN for |x| > 65536, which drops whole regions of the shadow
++    vec2 p = mod(gl_FragCoord.xy, 256.0);
++    return fract(sin(dot(vec2(12.9898, 78.233), p)) * 43758.5453);
+ }
+ 
+ float corner_alpha(vec2 size, vec2 position, float round_tl, float round_tr, float round_bl, float round_br);

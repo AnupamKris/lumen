@@ -1,0 +1,19 @@
+#!/bin/sh
+# Lock the session with swaylock, themed to match Lumen.
+# -f: fork once the screen is locked, so callers (swayidle) don't block.
+pgrep -xu "$(id -u)" swaylock >/dev/null && exit 0
+exec swaylock -f -F -e -c 1c1d21 \
+  --font "Inter" --font-size 14 \
+  --indicator-radius 64 --indicator-thickness 6 \
+  --inside-color 1c1d21ff --inside-clear-color 1c1d21ff \
+  --inside-ver-color 1c1d21ff --inside-wrong-color 1c1d21ff \
+  --ring-color 2e3036ff --ring-clear-color 8a8d94ff \
+  --ring-ver-color 8ab4f8ff --ring-wrong-color f28b82ff \
+  --key-hl-color 8ab4f8ff --bs-hl-color f28b82ff \
+  --line-color 00000000 --line-clear-color 00000000 \
+  --line-ver-color 00000000 --line-wrong-color 00000000 \
+  --separator-color 00000000 \
+  --text-color e8e8eaff --text-clear-color e8e8eaff \
+  --text-ver-color e8e8eaff --text-wrong-color f28b82ff \
+  --layout-bg-color 00000000 --layout-border-color 00000000 --layout-text-color 8a8d94ff \
+  "$@"
